@@ -6,6 +6,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterUserRequest extends FormRequest
@@ -27,7 +28,7 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', Password::default()],
         ];
     }
@@ -42,6 +43,7 @@ class RegisterUserRequest extends FormRequest
             'email.unique' => 'El campo email ya esta registrado.',
             'password.required' => 'El campo password es obligatorio.',
             'password.default' => 'El campo password debe tener como minimo 8 caracteres.',
+            'password.min' => 'El campo password debe tener como minimo 8 caracteres.',
         ];
     }
 }

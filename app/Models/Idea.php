@@ -4,20 +4,34 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\IdeaState;
 use Database\Factories\IdeaFactory;
 use Illuminate\Database\Eloquent\Attributes\Unguarded;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Unguarded]
 class Idea extends Model
 {
     /** @use HasFactory<IdeaFactory> */
     use HasFactory;
 
+    protected $casts = [
+        'links' => AsArrayObject::class,
+        'state' => IdeaState::class,
+    ];
+
+    protected $fillable = [
+        'state' => IdeaState::PENDING->value,
+    ];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function steps(): HasMany {
+        return $this->hasMany(Step::class);
     }
 }

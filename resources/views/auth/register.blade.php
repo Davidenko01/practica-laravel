@@ -1,19 +1,36 @@
-<x-layout>
-    <form action="/register" method="POST">
-        @csrf
-        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box mx-auto w-xs border p-4">
-            <legend class="fieldset-legend">Register</legend>
+<x-layout title="Register">
+    <x-forms
+        action="/register"
+        heading="Crear cuenta"
+        subheading="Registrate para empezar a guardar tus ideas."
+        submit="Crear cuenta">
 
-            <label class="label" for="username">Name</label>
-            <input type="text" id="username" name="username" class="input" placeholder="Your name" value="{{ old('username') }}" required/>
+        <x-forms.input
+            name="username"
+            label="Nombre"
+            placeholder="Tu nombre"
+            autocomplete="name"
+            required/>
 
-            <label class="email" for="email">Email</label>
-            <input type="email" name="email" class="input" placeholder="Your Email" required/>
+        <x-forms.input
+            name="email"
+            label="Email"
+            type="email"
+            placeholder="tu@email.com"
+            autocomplete="email"
+            required/>
 
-            <label class="label">Password</label>
-            <input type="password" name="password" class="input" placeholder="Password" required/>
+        <x-forms.input
+            name="password"
+            label="Contraseña"
+            type="password"
+            placeholder="Tu contraseña"
+            autocomplete="new-password"
+            required/>
 
-            <button class="btn btn-neutral mt-4">Register</button>
-        </fieldset>
-    </form>
+        <x-slot:footer>
+            ¿Ya tienes cuenta?
+            <a href="/login" class="text-foreground underline">Inicia sesion</a>
+        </x-slot:footer>
+    </x-forms>
 </x-layout>

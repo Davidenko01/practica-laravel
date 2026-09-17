@@ -39,6 +39,7 @@ class LoginUserRequest extends FormRequest
             'email.unique' => 'El campo email ya esta registrado.',
             'password.required' => 'El campo password es obligatorio.',
             'password.default' => 'El campo password debe tener como minimo 8 caracteres.',
+            'password.min' => 'El campo password debe tener como minimo 8 caracteres.',
         ];
     }
 }
