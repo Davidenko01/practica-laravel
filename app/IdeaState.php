@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 enum IdeaState: string
@@ -8,11 +10,12 @@ enum IdeaState: string
     case IN_PROGRESS = 'in_progress';
     case COMPLETED = 'completed';
 
-    public function label(): string {
+    public function label(): string
+    {
         return match ($this) {
-            self::PENDING => 'Is Pending',
-            self::IN_PROGRESS => 'Is In Progress',
-            self::COMPLETED => 'Is Completed',
+            self::PENDING => 'Pending',
+            self::IN_PROGRESS => 'In Progress',
+            self::COMPLETED => 'Completed',
         };
     }
 }
