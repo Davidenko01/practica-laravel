@@ -1,22 +1,20 @@
 @props(['idea'])
 
-@php
-    $stateClasses = match ($idea->state) {
-        \App\IdeaState::PENDING => 'bg-input text-muted-foreground',
-        \App\IdeaState::IN_PROGRESS => 'bg-primary/20 text-primary',
-        \App\IdeaState::COMPLETED => 'bg-primary text-primary-foreground',
-    };
-@endphp
-
 <a
-    href="/ideas/{{ $idea->id }}"
+    href="{{ route('idea.show', $idea) }}"
     {{ $attributes->merge(['class' => 'flex h-full flex-col gap-3 rounded-xl border border-border bg-card p-5 transition hover:border-primary']) }}>
+    @if ($idea->image_url)
+        <img
+            src="{{ $idea->image_url }}"
+            alt=""
+            loading="lazy"
+            class="-mx-5 -mt-5 h-40 w-[calc(100%_+_2.5rem)] max-w-none rounded-t-xl object-cover"/>
+    @endif
+
     <div class="flex items-start justify-between gap-3">
         <h2 class="font-medium">{{ $idea->title }}</h2>
 
-        <span class="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium {{ $stateClasses }}">
-            {{ $idea->state->label() }}
-        </span>
+        <x-idea-state :state="$idea->state"/>
     </div>
 
     @if ($idea->description)

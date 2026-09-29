@@ -7,6 +7,7 @@ namespace App\Models;
 use App\IdeaState;
 use Database\Factories\IdeaFactory;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -44,6 +45,18 @@ class Idea extends Model
                 $state->value => $counts->get($state->value, 0),
             ])
             ->put('all', $counts->sum());
+    }
+
+    /**
+     * The public URL of the idea image, if any.
+     *
+     * @return Attribute<?string, never>
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::get(fn (): ?string => $this->image_path
+            ? asset('storage/'.$this->image_path)
+            : null);
     }
 
     protected function casts(): array
