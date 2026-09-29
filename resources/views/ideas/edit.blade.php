@@ -1,5 +1,5 @@
 <x-layout>
-    <form method="POST" action="/ideas/{{ $idea->id }}">
+    <form method="POST" action="{{ route('idea.update', $idea) }}">
         @csrf
         {{-- Browser solo reconoce POST, para PUT o PATCH se pone method --}}
         @method('PATCH')
@@ -15,7 +15,7 @@
             </div>
         </div>
     </form>
-    <form method="POST" id="delete-idea-form" action="/ideas/{{ $idea->id }}">
+    <form method="POST" id="delete-idea-form" action="{{ route('idea.destroy', $idea) }}">
         @csrf
         @method('DELETE')
     </form>

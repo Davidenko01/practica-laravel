@@ -21,7 +21,7 @@ class SessionController extends Controller
             // Asegura que cada vez que se inicie sesion se recicle el token que tenemos para prevenir malos usos
             $request->session()->regenerate();
 
-            return redirect()->intended('/ideas')->with('success', 'Has iniciado sesion');
+            return redirect()->intended(route('ideas.index'))->with('success', 'Has iniciado sesion');
         }
 
         return back()->withErrors([
@@ -33,6 +33,6 @@ class SessionController extends Controller
     {
         Auth::logout();
 
-        return redirect('/ideas');
+        return redirect()->route('ideas.index');
     }
 }

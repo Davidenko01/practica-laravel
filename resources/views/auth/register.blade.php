@@ -1,6 +1,6 @@
 <x-layout title="Register">
     <x-forms
-        action="/register"
+        action="{{ route('register.store') }}"
         heading="Crear cuenta"
         subheading="Registrate para empezar a guardar tus ideas."
         submit="Crear cuenta">
@@ -30,7 +30,7 @@
 
         <x-slot:footer>
             ¿Ya tienes cuenta?
-            <a href="/login" class="text-foreground underline">Inicia sesion</a>
+            <a href="{{ route('login') }}" class="text-foreground underline">Inicia sesion</a>
         </x-slot:footer>
     </x-forms>
 </x-layout>

@@ -1,5 +1,5 @@
 <x-layout>
-    <form method="POST" action="/ideas">
+    <form method="POST" action="{{ route('idea.store') }}">
         @csrf
         {{-- Browser solo reconoce POST, para PUT o PATCH se pone method --}}
         <fieldset class="mt-6 fieldset bg-base-200 border-base-300 rounded-box mx-auto w-xs border p-4">

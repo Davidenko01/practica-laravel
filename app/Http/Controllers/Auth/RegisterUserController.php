@@ -23,6 +23,6 @@ class RegisterUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/ideas');
+        return redirect()->route('ideas.index');
     }
 }

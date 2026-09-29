@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/steps/{step}', [StepController::class, 'update'])->name('step.update');
 
-    Route::delete('/logout', [SessionController::class, 'destroy']);
+    Route::delete('/logout', [SessionController::class, 'destroy'])->name('logout');
 
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
@@ -35,15 +35,15 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('guest')->group(function () {
 
-    Route::get('/register', [RegisterUserController::class, 'create']);
+    Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
 
-    Route::post('/register', [RegisterUserController::class, 'store']);
+    Route::post('/register', [RegisterUserController::class, 'store'])->name('register.store');
 
-    Route::post('/login', [SessionController::class, 'store']);
+    Route::post('/login', [SessionController::class, 'store'])->name('login.store');
 
     Route::get('/login', [SessionController::class, 'create'])->name('login');
 });
 
-Route::get('admin', fn () => 'Vista del Panel Admin')->can('view-admin-panel');
+Route::get('admin', fn () => 'Vista del Panel Admin')->can('view-admin-panel')->name('admin');
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->name('home');
