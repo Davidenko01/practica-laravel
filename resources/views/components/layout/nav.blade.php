@@ -12,6 +12,7 @@
             @endguest
 
             @auth
+                <a href="{{ route('profile.edit') }}">Edit Profile</a>
                 <form method="POST" action="/logout">
                     @csrf
                     @method('DELETE')

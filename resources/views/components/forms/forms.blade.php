@@ -4,6 +4,7 @@
     'subheading' => null,
     'submit' => 'Enviar',
     'test' => 'submit',
+    'method' => null
 ])
 
 <div class="mx-auto mt-12 w-full max-w-sm">
@@ -16,7 +17,9 @@
 
         <form action="{{ $action }}" method="POST" class="mt-6 space-y-4">
             @csrf
-
+            @if($method)
+                @method($method)
+            @endif
             {{ $slot }}
 
             <button type="submit" data-test="{{ $test }}" class="btn mt-2 w-full text-center">{{ $submit }}</button>
